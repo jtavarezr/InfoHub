@@ -1,27 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MainNavigation = () => {
-
-     const createPost = async (event) => {
-       event.preventDefault();
-
-       if (
-         !post.name ||
-         !post.description
-       ) {
-         alert("Please fill out all required fields");
-         return;
-       }
-
-       try {
-         await supabase.from("crewmates").insert([post]);
-         setShowSuccessMessage(true);
-         setPost(initialState);
-       } catch (error) {
-         console.error("Error creating crewmate:", error.message);
-       }
-     };
+const SideNav = () => {
   return (
     <>
       <header>
@@ -32,17 +12,17 @@ const MainNavigation = () => {
         >
           <div className="position-sticky">
             <div className="list-group list-group-flush mx-3 mt-4">
-              <a
-                href="#"
+              <Link
+                to={"/all"}
                 className="list-group-item list-group-item-action py-2 ripple"
                 aria-current="true"
               >
                 <i className="bi bi-bank fa-fw me-3"></i>
                 <span>Main dashboard</span>
-              </a>
-              <Link to={"/new"}
-                href="#"
-                className="list-group-item list-group-item-action py-2 ripple active"
+              </Link>
+              <Link
+                to={"/new"}
+                className="list-group-item list-group-item-action py-2 ripple "
               >
                 <i className="bi bi-broadcast fa-fw me-3"></i>
                 <span>Create</span>
@@ -54,13 +34,12 @@ const MainNavigation = () => {
                 <i className="bi bi-lock fa-fw me-3"></i>
                 <span>Password</span>
               </a>
-              <a
-                href="#"
+              <Link to={"/update"}
                 className="list-group-item list-group-item-action py-2 ripple"
               >
                 <i className="bi bi-bar-chart fa-fw me-3"></i>
-                <span>Analytics</span>
-              </a>
+                <span>Update</span>
+              </Link>
               <a
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
@@ -103,13 +82,13 @@ const MainNavigation = () => {
                 <i className="fas fa-users fa-fw me-3"></i>
                 <span>Users</span>
               </a>
-              <a
+              <Link to={"/card:/id"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
                 <i className="fas fa-money-bill fa-fw me-3"></i>
                 <span>Sales</span>
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
@@ -120,4 +99,4 @@ const MainNavigation = () => {
   );
 };
 
-export default MainNavigation;
+export default SideNav;

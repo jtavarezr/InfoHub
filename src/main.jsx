@@ -6,6 +6,10 @@ import ErrorPage from "./error-page";
 import LoginForm from "./routes/Login";
 import TestConnection from "./routes/TestConnection";
 import CreatePost from "./routes/CreatePost";
+import Card from "./routes/Card";
+import ReadFeeds from "./routes/Feeds";
+import UpdatePost from "./routes/UpdatePost";
+import ModalExample from "./routes/ModalExample";
 
 
 
@@ -25,14 +29,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/test",
-        element: <TestConnection />
+        element: <TestConnection />,
       },
       {
         path: "/new",
-        element: <CreatePost />
+        element: <CreatePost />,
+      },
+      {
+        path: "/card",
+        element: <Card />,
+      },
+      {
+        path: "/all",
+        element: <ReadFeeds />,
+      },
+      {
+        path: "/update/:id",
+        element: <UpdatePost />,
       },
     ],
-  },
+  },{
+    path: "/x",
+    element: <ModalExample />}
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
