@@ -9,7 +9,6 @@ import CreatePost from "./routes/CreatePost";
 import Card from "./routes/Card";
 import ReadFeeds from "./routes/Feeds";
 import UpdatePost from "./routes/UpdatePost";
-import ModalExample from "./routes/ModalExample";
 
 
 
@@ -48,9 +47,7 @@ const router = createBrowserRouter([
         element: <UpdatePost />,
       },
     ],
-  },{
-    path: "/x",
-    element: <ModalExample />}
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

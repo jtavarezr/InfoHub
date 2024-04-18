@@ -58,6 +58,18 @@ const { id } = useParams();
     }
   };
 
+    const deleteCrewmate = async () => {
+  if (confirm(`You want Delete! ${id}`) == false) {
+    return
+  } 
+      try {
+        await supabase.from("post").delete().eq("id", id);
+        setShowSuccessMessage(true);
+        <Link to={"/"} />;
+      } catch (error) {
+        console.error("Error deleting post:", error.message);
+      }
+    };
   return (
     <>
       <div className="update-post">
@@ -124,6 +136,19 @@ const { id } = useParams();
           <button type="submit" className="btn btn-primary">
             Update Post
           </button>
+          <div
+            type="button"
+            className="btn btn-danger"
+            onClick={deleteCrewmate}
+          >
+            <Link to="/all">Delete</Link>
+          </div>
+          <div
+            type="button"
+            className="btn btn-secondary"
+          >
+            <Link to="/all">Cancel</Link>
+          </div>
         </form>
       </div>
     </>
