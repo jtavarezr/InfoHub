@@ -8,6 +8,7 @@ const UpdatePost = ({ postId }) => {
     title: "",
     content: "",
     image_url: "",
+    source_url: "",
   };
 
   const [post, setPost] = useState(initialState);
@@ -72,83 +73,109 @@ const { id } = useParams();
     };
   return (
     <>
-      <div className="update-post">
-        <h1>Update Post</h1>
-      </div>
-      {showSuccessMessage && (
-        <div
-          className="alert alert-success alert-dismissible fade show"
-          role="alert"
-        >
-          Post updated successfully!
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-            onClick={() => setShowSuccessMessage(false)}
-          ></button>
-        </div>
-      )}
-      <div>
+      <div className="container">
+        <h1>Updating Post  {post.id}</h1>
+        {showSuccessMessage && (
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            Post created successfully!
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+              onClick={() => setShowSuccessMessage(false)}
+            ></button>
+          </div>
+        )}
         <form onSubmit={updatePost}>
-          <div className="mb-3">
-            <label htmlFor="title" className="form-label">
-              Title
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="title"
-              name="title"
-              value={post.title}
-              onChange={handleChange}
-              required
-            />
+          <div className="row w-75 mx-auto">
+            <div className="col-md-12">
+              <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={post.title}
+                  onChange={handleChange}
+                  aria-label="Title"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="content">Content</label>
+                <textarea
+                  className="form-control"
+                  id="content"
+                  name="content"
+                  rows="5"
+                  value={post.content}
+                  onChange={handleChange}
+                  aria-label="Content"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group">
+                <label htmlFor="image_url">Image address</label>
+                <input
+                  className="form-control"
+                  type="url"
+                  id="image_url"
+                  name="image_url"
+                  value={post.image_url}
+                  onChange={handleChange}
+                  aria-label="image_url"
+                  placeholder="Optional"
+                ></input>
+              </div>
+              <div className="form-group">
+                <label htmlFor="source_url">URL</label>
+                <input
+                  className="form-control"
+                  type="url"
+                  id="source_url"
+                  name="source_url"
+                  value={post.source_url}
+                  onChange={handleChange}
+                  aria-label="source_url"
+                  placeholder="Optional"
+                ></input>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              {/* Image */}
+              <div className="bg-image overflow ripple rounded-0">
+                <img
+                  src={
+                    post.image_url
+                      ? post.image_url
+                      : "http://via.placeholder.com/640x360"
+                  }
+                  className="w-50"
+                  alt="Insert your image address"
+                />
+                <a href="#!">
+                  <div
+                    className="mask"
+                    style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                  ></div>
+                </a>
+              </div>
+            </div>
+            <hr className="hr hr-blurry" />
+
+            <button type="submit" className="btn btn-primary w-100">
+              Submit
+            </button>
           </div>
-          <div className="mb-3">
-            <label htmlFor="content" className="form-label">
-              Content
-            </label>
-            <textarea
-              className="form-control"
-              id="content"
-              name="content"
-              rows="5"
-              value={post.content}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="image_url" className="form-label">
-              Image URL
-            </label>
-            <input
-              type="url"
-              className="form-control"
-              id="image_url"
-              name="image_url"
-              value={post.image_url}
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Update Post
-          </button>
-          <div
-            type="button"
-            className="btn btn-danger"
-            onClick={deleteCrewmate}
-          >
-            <Link to="/all">Delete</Link>
-          </div>
-          <div
-            type="button"
-            className="btn btn-secondary"
-          >
-            <Link to="/all">Cancel</Link>
-          </div>
+          <div className="form-group col-md-4"></div>
         </form>
       </div>
     </>
