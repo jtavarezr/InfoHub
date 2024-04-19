@@ -11,7 +11,6 @@ import ReadFeeds from "./routes/Feeds";
 import UpdatePost from "./routes/UpdatePost";
 
 
-
 const router = createBrowserRouter([
   {
     path: "/",

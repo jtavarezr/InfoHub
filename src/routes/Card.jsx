@@ -41,6 +41,7 @@ function Card({
   created_at,
   comments,
   comment_count,
+  source_url,
 }) {
   const [likeCount, setLikeCount] = useState(upvotes);
   const [modalOpen, setModalOpen] = useState(false);
@@ -174,6 +175,8 @@ function Card({
           upvotes={upvotes}
           count_comment={comment_count}
           id={id}
+          title={title}
+          source_url={source_url}
         />
       </div>
     </div>

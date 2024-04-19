@@ -40,7 +40,7 @@ const ReadFeeds = () => {
   const fetchPosts = async () => {
     try {
       const { data } = await supabase
-        .from("vs_post_comments")
+        .from("vs_postandcomments")
         .select()
         .order("created_at", { ascending: false });
 
@@ -69,6 +69,8 @@ const ReadFeeds = () => {
             // Grid layout for displaying posts
             <div className="row row-cols-1 row-cols-md-4 g-4 p-4">
               {posts.map((post) => (
+                <>
+                  {console.log(post)}
                 <Card
                   key={post.id}
                   id={post.id}
@@ -79,7 +81,9 @@ const ReadFeeds = () => {
                   created_at={post.created_at}
                   comments={post.comments}
                   comment_count={post.count_comment}
-                />
+                  source_url= {post.source_url}
+                  />
+                  </>
               ))}
             </div>
           ) : (

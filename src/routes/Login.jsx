@@ -61,7 +61,7 @@ const LoginForm = () => {
               {/* Submit button */}
               <div className="">
                 <Link
-                  to="/test"
+                  to="/all"
                   data-mdb-button-init
                   data-mdb-ripple-init
                   className="btn btn-primary btn-lg btn-block"
