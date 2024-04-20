@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ handleSignOut }) => {
   return (
     <div className="bg-body-tertiary">
       {" "}
@@ -89,9 +89,9 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <Link to={"/login"} className="dropdown-item" href="#">
-                    Logout.
-                  </Link>
+                  <button className="dropdown-item" onClick={handleSignOut}>
+                    Logout
+                  </button>
                 </li>
               </ul>
             </li>

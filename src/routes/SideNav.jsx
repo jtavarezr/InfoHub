@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SideNav = () => {
+const SideNav = ({ handleSignOut }) => {
   return (
     <>
       <header>
@@ -34,7 +34,8 @@ const SideNav = () => {
                 <i className="bi bi-lock fa-fw me-3"></i>
                 <span>Password</span>
               </a>
-              <Link to={"/update"}
+              <Link
+                to={"/update"}
                 className="list-group-item list-group-item-action py-2 ripple"
               >
                 <i className="bi bi-bar-chart fa-fw me-3"></i>
@@ -82,13 +83,9 @@ const SideNav = () => {
                 <i className="fas fa-users fa-fw me-3"></i>
                 <span>Users</span>
               </a>
-              <Link to={"/card:/id"}
-                href="#"
-                className="list-group-item list-group-item-action py-2 ripple"
-              >
-                <i className="fas fa-money-bill fa-fw me-3"></i>
-                <span>Sales</span>
-              </Link>
+              <button className="dropdown-item" onClick={handleSignOut}>
+                Logout
+              </button>
             </div>
           </div>
         </nav>
