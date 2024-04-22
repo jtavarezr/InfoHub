@@ -132,14 +132,12 @@ function PostModal({
                   </div>
                 </div>
                 {/* Close Button */}
-                <button
-                  type="button"
-                  className="bi fs-8 position-absolute btn-close top-0 end-0"
+                <div
+                  className="bi bi-x-circle fs-4 position-absolute  top-0 end-0"
                   onClick={closeModal}
                 >
                   {" "}
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
                 {/* Post Content */}
                 <div
                   className="overflow-auto p-3 "

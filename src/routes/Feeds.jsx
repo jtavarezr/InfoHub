@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../clients";
 import Card from "./Card";
-import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js";
 
 /**
  * ReadFeeds Component
@@ -69,10 +68,8 @@ const ReadFeeds = () => {
             // Grid layout for displaying posts
             <div className="row row-cols-1 row-cols-md-4 g-4 p-4">
               {posts.map((post) => (
-                <>
-                  {console.log(post)}
                 <Card
-                  key={post.id}
+                  key={post.id} // Usar el atributo id como key
                   id={post.id}
                   title={post.title}
                   image_url={post.image_url}
@@ -81,9 +78,8 @@ const ReadFeeds = () => {
                   created_at={post.created_at}
                   comments={post.comments}
                   comment_count={post.count_comment}
-                  source_url= {post.source_url}
-                  />
-                  </>
+                  source_url={post.source_url}
+                />
               ))}
             </div>
           ) : (

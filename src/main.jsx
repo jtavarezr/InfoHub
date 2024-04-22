@@ -9,6 +9,14 @@ import CreatePost from "./routes/CreatePost";
 import Card from "./routes/Card";
 import ReadFeeds from "./routes/Feeds";
 import UpdatePost from "./routes/UpdatePost";
+import AuthProvider from "./auth/AuthProvider";
+import Tags from "./utils/Tags";
+import CodeOfConduct from "./utils/CodeOfConduct";
+import About from "./utils/About";
+import YouTubeVideoCard from "./utils/YouTubeVideoCard";
+import Register from "./auth/Register";
+import UserList from "./auth/UserList";
+import UserInfo from "./auth/UserInfo";
 
 
 const router = createBrowserRouter([
@@ -24,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/loged",
         element: <div>Welcome</div>,
+      },
+      {
+        path: "/user",
+        element: <div><h1>Desde User Info </h1><UserInfo /></div>,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/test",
@@ -45,12 +61,51 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <UpdatePost />,
       },
+      {
+        path: "/questions",
+        element: (
+          <div>
+            <h1>Questions...</h1>
+          </div>
+        ),
+      },
+
+      {
+        path: "/topics",
+        element: <Tags />,
+      },
+      {
+        path: "/groups",
+        element: (
+          <div>
+            <h1>Groups...</h1>
+          </div>
+        ),
+      },
+      {
+        path: "/lists",
+        element: <UserList />
+      },
+      {
+        path: "/videos",
+        element: <YouTubeVideoCard />
+      },
+      {
+        path: "/conducts",
+        element: <CodeOfConduct />
+      },
+      {
+        path: "/about",
+        element: <About />
+      },
     ],
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

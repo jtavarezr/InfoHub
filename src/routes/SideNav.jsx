@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import supabase from "../clients";
 
-const SideNav = ({ handleSignOut }) => {
+const SideNav = () => {
+    const handleSignOut = async () => {
+      const { error } = await supabase.auth.signOut();
+    };
   return (
     <>
       <header>
@@ -17,8 +21,8 @@ const SideNav = ({ handleSignOut }) => {
                 className="list-group-item list-group-item-action py-2 ripple"
                 aria-current="true"
               >
-                <i className="bi bi-bank fa-fw me-3"></i>
-                <span>Main dashboard</span>
+                <i className="bi bi-house-fill fa-fw me-3"></i>
+                <span>Feeds</span>
               </Link>
               <Link
                 to={"/new"}
@@ -31,59 +35,83 @@ const SideNav = ({ handleSignOut }) => {
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="bi bi-lock fa-fw me-3"></i>
-                <span>Password</span>
+                <i className="bi bi-graph-up-arrow fa-fw me-3"></i>
+                <span>Popular</span>
               </a>
               <Link
-                to={"/update"}
+                to={"/recents"}
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="bi bi-bar-chart fa-fw me-3"></i>
-                <span>Update</span>
+                <i className="bi bi-clock-fill fa-fw me-3"></i>
+                <span>Recents</span>
               </Link>
-              <a
+              <Link
+                to={"/videos"}
+                className="list-group-item list-group-item-action py-2 ripple"
+              >
+                <i className="bi bi-person-video2 fa-fw me-3"></i>
+                <span>Videos</span>
+              </Link>
+              <Link
+                to={"/questions"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-chart-pie fa-fw me-3"></i>
-                <span>SEO</span>
-              </a>
-              <a
+                <i className="bi bi-question-circle-fill fa-fw me-3"></i>
+                <span>Questions</span>
+              </Link>
+              <Link
+                to={"/topics"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-chart-bar fa-fw me-3"></i>
-                <span>Orders</span>
-              </a>
-              <a
+                <i className="bi bi-tags-fill fa-fw me-3"></i>
+                <span>Topics</span>
+              </Link>
+              <Link
+                to={"/lists"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-globe fa-fw me-3"></i>
-                <span>International</span>
-              </a>
-              <a
+                <i className="bi bi-list fa-fw me-3"></i>
+                <span>List</span>
+              </Link>
+              <Link
+                to={"/groups"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-building fa-fw me-3"></i>
-                <span>Partners</span>
-              </a>
-              <a
+                <i className="bi bi-people-fill fa-fw me-3"></i>
+                <span>Groups</span>
+              </Link>
+              <Link
+                to={"/user"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-calendar fa-fw me-3"></i>
-                <span>Calendar</span>
-              </a>
-              <a
+                <i className="bi bi-people-fill fa-fw me-3"></i>
+                <span>User Info</span>
+              </Link>
+              <Link
+                to={"/conducts"}
                 href="#"
                 className="list-group-item list-group-item-action py-2 ripple"
               >
-                <i className="fas fa-users fa-fw me-3"></i>
-                <span>Users</span>
-              </a>
-              <button className="dropdown-item" onClick={handleSignOut}>
+                <i className="bi bi-people fa-fw me-3"></i>
+                <span>Conduct Code</span>
+              </Link>
+              <Link
+                to={"/about"}
+                href="#"
+                className="list-group-item list-group-item-action py-2 ripple"
+              >
+                <i className="bi bi-people fa-fw me-3"></i>
+                <span>About</span>
+              </Link>
+              <button
+                className="dropdown-item bi bi-box-arrow-right"
+                onClick={handleSignOut}
+              >
                 Logout
               </button>
             </div>

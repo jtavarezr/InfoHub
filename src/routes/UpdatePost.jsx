@@ -74,7 +74,7 @@ const { id } = useParams();
   return (
     <>
       <div className="container">
-        <h1>Updating Post  {post.id}</h1>
+        <h1>Updating Post {post.id}</h1>
         {showSuccessMessage && (
           <div
             className="alert alert-success alert-dismissible fade show"
@@ -170,12 +170,24 @@ const { id } = useParams();
               </div>
             </div>
             <hr className="hr hr-blurry" />
-
-            <button type="submit" className="btn btn-primary w-100">
-              Submit
-            </button>
           </div>
-          <div className="form-group col-md-4"></div>
+          <div className="container form-group col-md-4">
+       
+
+            <button type="submit" className="btn btn-primary">
+              Update Post
+            </button>
+            <div
+              type="button"
+              className="btn btn-danger"
+              onClick={deleteCrewmate}
+            >
+              <Link to="/all">Delete</Link>
+            </div>
+            <div type="button" className="btn btn-secondary">
+              <Link to="/all">Cancel</Link>
+            </div>
+          </div>
         </form>
       </div>
     </>
