@@ -1,66 +1,53 @@
-import React from "react";
-import { CDBSidebar } from 'cdbreact';
-
+"use client";
+import { useState } from "react";
 
 const Sidebar = () => {
+
   return (
-    <CDBSidebar textColor="#333" backgroundColor="#f4f4f4">
-      <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-        BABYCARE ™
-      </CDBSidebarHeader>
-
-      <CDBSidebarContent>
-        <CDBSidebarMenu>
-          <CDBSidebarMenuItem icon="th-large" textFontSize="14px">
-            Dashboard
-          </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem icon="sticky-note" textFontSize="14px">
-            Explore
-          </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem
-            icon="credit-card"
-            iconType="solid"
-            textFontSize="14px"
-          >
-            Care Products
-          </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem
-            icon="gamepad"
-            iconType="solid"
-            textFontSize="14px"
-          >
-            Fun and Games
-          </CDBSidebarMenuItem>
-        </CDBSidebarMenu>
-        <CDBSidebarMenu>
-          <CDBSidebarSubMenu title="Store" icon="shopping-bag">
-            <CDBSidebarMenuItem>Food </CDBSidebarMenuItem>
-            <CDBSidebarMenuItem>Clothes </CDBSidebarMenuItem>
-            <CDBSidebarSubMenu title="Accessories">
-              <CDBSidebarMenuItem>Fitbit</CDBSidebarMenuItem>
-              <CDBSidebarMenuItem>Cardio</CDBSidebarMenuItem>
-              <CDBSidebarSubMenu title="Tickets">
-                <CDBSidebarMenuItem>Counselling</CDBSidebarMenuItem>
-                <CDBSidebarMenuItem>Postnatal</CDBSidebarMenuItem>
-                <CDBSidebarMenuItem>Yoga</CDBSidebarMenuItem>
-              </CDBSidebarSubMenu>
-            </CDBSidebarSubMenu>
-          </CDBSidebarSubMenu>
-        </CDBSidebarMenu>
-      </CDBSidebarContent>
-
-      <CDBSidebarCTA
-        theme="overlay"
-        image={<Image />}
-        text="Sign up Pro Here"
-      ></CDBSidebarCTA>
-      <CDBSidebarFooter style={{ textAlign: "center" }}>
-        <div className="sidebar-btn-wrapper" style={{ padding: "20px 5px" }}>
-          Sidebar Footer
+    <>
+      <div className="offcanvas offcanvas-start text-bg-dark" id="sidebarMenu">
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title">Menu</h5>
+          <button
+            type="button"
+            className="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
         </div>
-      </CDBSidebarFooter>
-    </CDBSidebar>
+        <div className="offcanvas-body">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Features
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                About
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link disabled"
+                href="#"
+                tabIndex="-1"
+                aria-disabled="true"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
   );
 };
+
 
 export default Sidebar;

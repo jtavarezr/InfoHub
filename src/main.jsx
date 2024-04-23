@@ -17,7 +17,8 @@ import YouTubeVideoCard from "./utils/YouTubeVideoCard";
 import Register from "./auth/Register";
 import UserList from "./auth/UserList";
 import UserInfo from "./auth/UserInfo";
-
+import DashBoard from "./utils/DashBoard";
+import Account from "./auth/Account";
 
 const router = createBrowserRouter([
   {
@@ -26,21 +27,19 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/login",
-        element: <LoginForm />,
-      },
-      {
         path: "/loged",
         element: <div>Welcome</div>,
       },
       {
-        path: "/user",
-        element: <div><h1>Desde User Info </h1><UserInfo /></div>,
+        path: "/Account",
+        element: (
+          <div>
+            <h1>Desde User Info </h1>
+            <UserInfo />
+          </div>
+        ),
       },
-      {
-        path: "/register",
-        element: <Register />,
-      },
+
       {
         path: "/test",
         element: <TestConnection />,
@@ -84,21 +83,33 @@ const router = createBrowserRouter([
       },
       {
         path: "/lists",
-        element: <UserList />
+        element: <UserList />,
       },
       {
         path: "/videos",
-        element: <YouTubeVideoCard />
+        element: <YouTubeVideoCard />,
       },
       {
         path: "/conducts",
-        element: <CodeOfConduct />
+        element: <CodeOfConduct />,
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashBoard />,
       },
     ],
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <LoginForm />,
   },
 ]);
 

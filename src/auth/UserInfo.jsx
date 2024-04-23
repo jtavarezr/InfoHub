@@ -2,9 +2,44 @@ import React, { useState, useEffect } from "react";
 import supabase from "../clients";
 
 function UserInfo() {
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [user, setUser] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [loading, setLoading] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      setErrorMsg("");
+
+      // Validar que los campos no estén vacíos
+      if (!firstName || !lastName || !password) {
+        setErrorMsg("Please fill in all the fields");
+        return;
+      }
+
+      // Actualizar la información del usuario en Supabase
+      const { error } = await supabase.auth.updateUser({
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+        },
+        password: password,
+      });
+
+      if (error) {
+        setErrorMsg(error.message);
+      } else {
+        // Actualización exitosa
+        console.log("User information updated successfully!");
+      }
+    } catch (error) {
+      console.error("Error updating user information:", error.message);
+      setErrorMsg("Failed to update user information");
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -15,18 +50,8 @@ function UserInfo() {
           console.error("Error fetching user data:", error.message);
         } else {
           setUser(userData.user);
-          console.log("USER INFO:", userData.user.user_metadata);
-          if (userData.user?.user_metadata?.avatar) {
-            console.log("TIENE AVATAR")
-            const { data: signedUrlData, error: signedUrlError } = await supabase.storage
-              .from("avatars")
-              .createSignedUrl(userData.user.user_metadata.avatar, 60 * 60 * 24 * 365); // 1 year expiration
-            if (signedUrlError) {
-              console.error("Error fetching avatar URL:", signedUrlError.message);
-            } else {
-              setAvatarUrl(signedUrlData.signedURL);
-            }
-          }
+          setFirstName(userData.user.user_metadata?.first_name || "");
+          setLastName(userData.user.user_metadata?.last_name || "");
         }
       } catch (error) {
         console.error("Error fetching user data:", error.message);
@@ -37,33 +62,47 @@ function UserInfo() {
 
     fetchUserData();
   }, []);
-
-  if (loading) {
-    return (
-      <div>
-        <h1>User Info</h1>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div>
-        <h1>User Info</h1>
-        <p>No user data available.</p>
-      </div>
-    );
-  }
+  if (loading) return <p>Loading...</p>;
+  if (!user) return <p>Please sign in to update your information.</p>;
 
   return (
     <div>
       <h1>User Info</h1>
       <p>Email: {user.email}</p>
-      <p>First Name: {user.user_metadata.first_name}</p>
-      <p>Last Name: {user.user_metadata.last_name}</p>
-      <p>Age: {user.user_metadata.age}</p>
-      {avatarUrl && <img src={avatarUrl} alt="Avatar" />}
+      <p>First Name: {firstName}</p>
+      <p>Last Name: {lastName}</p>
+      <h1>Update User Information</h1>
+      <form onSubmit={handleUpdate}>
+        <label>
+          First Name:
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Last Name:
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit">Update Information</button>
+      </form>
+      {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
     </div>
   );
 }

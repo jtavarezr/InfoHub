@@ -78,7 +78,7 @@ const CustomNavbar = () => {
           title={user?.user_metadata?.first_name}
           className="btn-group dropstart"
         >
-          <NavDropdown.Item>Action</NavDropdown.Item>
+          <NavDropdown.Item className="bi bi-envelope"><Link to={"/dashboard"}>dashboard</Link></NavDropdown.Item>
           <NavDropdown.Item>Another action</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={handleSignOut}>Log Out</NavDropdown.Item>
