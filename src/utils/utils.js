@@ -19,23 +19,29 @@ export const updateCount = async (id, count, setCount) => {
   }
 };
 
-export const fetchComments = async (id) => {
+export async function fetchComments(id) {
   try {
     const { data, error } = await supabase
       .from("comments")
-      .select("comment")
-      .eq("content_id", id)
+      .select("*")
+      .eq("content_id", id);
 
     if (error) {
-      console.error("Error fetching comments:", error.message);
-      return []; // Devuelve un arreglo vacío si hay un error
-    } else {
-      return data // Devuelve los comentarios obtenidos
+      throw new Error("Error fetching comments: " + error.message);
     }
+
+    return data;
   } catch (error) {
     console.error("Error fetching comments:", error.message);
-    return []; // Devuelve un arreglo vacío si hay un error
+    return [];
   }
-};
+}
 
-
+export async function createComment(comment) {
+  try {
+    await supabase.from("comments").insert([comment]);
+  } catch (error) {
+    console.error("Error creating comment:", error.message);
+    throw error;
+  }
+}
