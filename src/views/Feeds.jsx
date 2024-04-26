@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../clients";
-import Card from "./Card";
+import Card from "../routes/Card";
 
 /**
  * ReadFeeds Component
@@ -13,20 +13,6 @@ const ReadFeeds = () => {
   const [loading, setLoading] = useState(true); // Loading state indicator
   const [error, setError] = useState(null); // Error message if fetching fails
   const [showModal, setShowModal] = useState(false); // Modal open/close state
-
-  /**
-   * Opens the modal.
-   */
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  /**
-   * Closes the modal.
-   */
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   // Fetch posts on component mount
   useEffect(() => {

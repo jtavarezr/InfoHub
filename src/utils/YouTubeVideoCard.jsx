@@ -14,7 +14,7 @@ const YouTubeVideoCard = () => {
         <Card key={index}>
           <Card.Body>
             <iframe
-              width="100%"
+              width="50%"
               height="415"
               src={url.replace("watch?v=", "embed/")}
               title={`YouTube Video ${index + 1}`}

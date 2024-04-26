@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import {
+  CFormLabel,
+  CInputGroup,
+  CInputGroupText,
+  CFormInput,
+  CRow,
+  CCol,
+  CFormSelect,
+} from "@coreui/react";
 import supabase from "../clients";
 
 const UpdatePost = ({ postId }) => {
@@ -9,12 +17,23 @@ const UpdatePost = ({ postId }) => {
     content: "",
     image_url: "",
     source_url: "",
+    category: "",
   };
 
   const [post, setPost] = useState(initialState);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 const { id } = useParams();
 
+  const [categories, setCategory] = useState([]);
+
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  async function getCountries() {
+    const { data } = await supabase.from("tags_category").select();
+    setCategory(data);
+  }
 
   useEffect(() => {
     fetchPost();
@@ -25,6 +44,13 @@ const { id } = useParams();
     setPost((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleChangeCategory = (event) => {
+    const { value } = event.target;
+    setPost((prevPost) => ({
+      ...prevPost,
+      category: value,
+    }));
+  };
   const fetchPost = async () => {
     try {
       const { data, error } = await supabase
@@ -93,19 +119,38 @@ const { id } = useParams();
         <form onSubmit={updatePost}>
           <div className="row w-75 mx-auto">
             <div className="col-md-12">
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  name="title"
-                  value={post.title}
-                  onChange={handleChange}
-                  aria-label="Title"
-                  required
-                />
-              </div>
+              <CRow xs={{ gutter: 2 }}>
+                <CCol md>
+                  <CFormInput
+                    floatingLabel="Post Title"
+                    placeholder="title"
+                    id="title"
+                    name="title"
+                    value={post.title}
+                    onChange={handleChange}
+                    aria-label="Title"
+                    required
+                    type="text"
+                  />
+                </CCol>
+                <CCol md>
+                  <CFormSelect
+                    id="category"
+                    floatingLabel="Category"
+                    aria-label="Works with selects"
+                    value={post.category}
+                    onChange={handleChangeCategory}
+                  >
+                    <option value="">Choose Categories...</option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </CFormSelect>
+                </CCol>
+              </CRow>
+
               <div className="form-group">
                 <label htmlFor="content">Content</label>
                 <textarea
@@ -121,19 +166,21 @@ const { id } = useParams();
               </div>
             </div>
             <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="image_url">Image address</label>
-                <input
-                  className="form-control"
-                  type="url"
+              <CFormLabel htmlFor="basic-url">Image URL</CFormLabel>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="basic-addon3">
+                  https://example.com/users/
+                </CInputGroupText>
+                <CFormInput
                   id="image_url"
                   name="image_url"
                   value={post.image_url}
                   onChange={handleChange}
                   aria-label="image_url"
                   placeholder="Optional"
-                ></input>
-              </div>
+                  aria-describedby="basic-addon3"
+                />
+              </CInputGroup>
               <div className="form-group">
                 <label htmlFor="source_url">URL</label>
                 <input
@@ -172,8 +219,6 @@ const { id } = useParams();
             <hr className="hr hr-blurry" />
           </div>
           <div className="container form-group col-md-4">
-       
-
             <button type="submit" className="btn btn-primary">
               Update Post
             </button>
