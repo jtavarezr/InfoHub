@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../clients";
 import Card from "../routes/Card";
-import { CCol, CFormSelect, CRow } from "@coreui/react";
+import { CCol, CFormSelect, CRow, CFormInput } from "@coreui/react";
 
 /**
  * ReadFeeds Component
@@ -15,6 +15,7 @@ const ReadFeeds = () => {
   const [error, setError] = useState(null); // Error message if fetching fails
   const [showModal, setShowModal] = useState(false); // Modal open/close state
   const [filterOption, setFilterOption] = useState("date");
+const [searchInput, setSearchInput] = useState("");
 
   // Fetch posts on component mount
   useEffect(() => {
@@ -56,6 +57,19 @@ const ReadFeeds = () => {
     setPosts(sortedPosts);
   };
 
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchValue !== "") {
+      const filteredData = posts.filter((post) =>
+        post.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setPosts(filteredData);
+    } else {
+      fetchPosts(); // Si el campo de búsqueda está vacío, vuelve a cargar todos los posts
+    }
+  };
+
+
   return (
     <>
       <div className="container">
@@ -63,6 +77,14 @@ const ReadFeeds = () => {
         <h1>Latest News</h1>
         <div>
           <CRow>
+            <CCol md>
+              
+            <CFormInput 
+              type="text"
+              placeholder="Search..."
+              onChange={(inputString) => searchItems(inputString.target.value)}
+              />
+              </CCol>
             <CCol md>
               <CFormSelect
                 id="category"

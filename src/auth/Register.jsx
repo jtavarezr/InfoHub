@@ -9,6 +9,7 @@ function Register() {
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const ageRef = useRef(null);
+  const usernameRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState("");
 
 
@@ -26,7 +27,7 @@ function Register() {
           first_name: firstNameRef.current.value,
           last_name: lastNameRef.current.value,
           age: ageRef.current.value,
-          userName
+          userName: usernameRef.value,
         },
         avatar: avatarFile,
       },
@@ -75,21 +76,25 @@ function Register() {
                         required
                       />
                     </Form.Group>
+                    <Form.Group id="username">
+                      <Form.Label>User Name</Form.Label>
+                      <Form.Control type="text" ref={usernameRef}  />
+                    </Form.Group>
                     <Form.Group id="firstName">
                       <Form.Label>First Name</Form.Label>
-                      <Form.Control type="text" ref={firstNameRef} required />
+                      <Form.Control type="text" ref={firstNameRef}  />
                     </Form.Group>
                     <Form.Group id="lastName">
                       <Form.Label>Last Name</Form.Label>
-                      <Form.Control type="text" ref={lastNameRef} required />
+                      <Form.Control type="text" ref={lastNameRef}  />
                     </Form.Group>
                     <Form.Group id="age">
                       <Form.Label>Age</Form.Label>
-                      <Form.Control type="number" ref={ageRef} required />
+                      <Form.Control type="number" ref={ageRef}  />
                     </Form.Group>
                     <Form.Group id="avatar">
                       <Form.Label>Avatar</Form.Label>
-                      <Form.Control type="file" ref={avatarFile} required />
+                      <Form.Control type="file" ref={avatarFile}  />
                     </Form.Group>
                     {errorMsg && (
                       <Alert
