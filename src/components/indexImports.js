@@ -36,7 +36,7 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import PolicyIcon from "@mui/icons-material/Policy";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-
+import HomeIcon from "@mui/icons-material/Home";
 
 export {
   supabase,
@@ -79,4 +79,5 @@ export {
   ContactPhoneIcon,
   PolicyIcon,
   RateReviewIcon,
+  HomeIcon,
 };

@@ -15,10 +15,29 @@ const ReadFeeds = () => {
   const [error, setError] = useState(null); // Error message if fetching fails
   const [showModal, setShowModal] = useState(false); // Modal open/close state
   const [filterOption, setFilterOption] = useState("date");
-const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [username, setUsername] = useState("");
+
+  const fetchUserData = async () => {
+    try {
+      setLoading(true);
+      const { data: userData, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user data:", error.message);
+      } else {
+        setUsername(userData.user.user_metadata?.first_name || "");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   // Fetch posts on component mount
   useEffect(() => {
+    fetchUserData();
     fetchPosts();
   }, []);
 

@@ -36,22 +36,8 @@ import {
   ContactPhoneIcon,
   PolicyIcon,
   RateReviewIcon,
+  HomeIcon,
 } from "../components/indexImports";
-import CIcon from '@coreui/icons-react'
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const MainLayout =() => {
   const theme = useTheme();
@@ -287,7 +273,7 @@ const Drawer = styled(MuiDrawer, {
 
         <List>
           {Object.entries({
-            all: { text: "All Feeds", icon: <InboxIcon /> },
+            all: { text: "Home", icon: <HomeIcon /> },
             new: { text: "Write new post", icon: <RateReviewIcon /> },
             videos: { text: "Videos", icon: <SlideshowIcon /> },
             topics: { text: "Topics", icon: <SellIcon /> },

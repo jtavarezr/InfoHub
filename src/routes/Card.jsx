@@ -32,7 +32,7 @@ import { Link } from "react-router-dom";
 import { updateCount } from "../utils/utils";
 import PostModal from "./PostModal";
 import Button from "@mui/material/Button";
-import ResponsiveDialog from "./PostModal2";
+import ResponsiveDialog from "../views/PostInfo";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import supabase from "../clients";
 
