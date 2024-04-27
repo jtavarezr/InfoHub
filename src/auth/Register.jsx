@@ -26,6 +26,7 @@ function Register() {
           first_name: firstNameRef.current.value,
           last_name: lastNameRef.current.value,
           age: ageRef.current.value,
+          userName
         },
         avatar: avatarFile,
       },

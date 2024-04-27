@@ -1,6 +1,7 @@
 import React, {useState, } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { styled, useTheme, alpha } from "@mui/material/styles";
+import supabase from "../clients";
 import {
   Box,
   List,

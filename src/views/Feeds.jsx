@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../clients";
 import Card from "../routes/Card";
+import { CCol, CFormSelect, CRow } from "@coreui/react";
 
 /**
  * ReadFeeds Component
@@ -13,6 +14,7 @@ const ReadFeeds = () => {
   const [loading, setLoading] = useState(true); // Loading state indicator
   const [error, setError] = useState(null); // Error message if fetching fails
   const [showModal, setShowModal] = useState(false); // Modal open/close state
+  const [filterOption, setFilterOption] = useState("date");
 
   // Fetch posts on component mount
   useEffect(() => {
@@ -38,14 +40,42 @@ const ReadFeeds = () => {
     }
   };
 
-  // JSX
+  // Función para manejar los cambios en el select de filtro
+  const handleFilterChange = (event) => {
+    setFilterOption(event.target.value);
+
+    let sortedPosts = [...posts];
+    if (event.target.value === "date") {
+      sortedPosts.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+    } else if (event.target.value === "upvotes") {
+      sortedPosts.sort((a, b) => b.upvotes - a.upvotes);
+    }
+
+    setPosts(sortedPosts);
+  };
+
   return (
     <>
       <div className="container">
         <br />
         <h1>Latest News</h1>
         <div>
-          {/* Conditional rendering based on loading and error states */}
+          <CRow>
+            <CCol md>
+              <CFormSelect
+                id="category"
+                floatingLabel="Order By"
+                aria-label="Works with selects"
+                value={filterOption}
+                onChange={handleFilterChange}
+              >
+                <option value="date">Date</option>
+                <option value="upvotes">Likes</option>
+              </CFormSelect>
+            </CCol>
+          </CRow>
           {loading ? (
             <h2>Loading...</h2>
           ) : error ? (
@@ -55,7 +85,7 @@ const ReadFeeds = () => {
             <div className="row row-cols-1 row-cols-md-4 g-4 p-4">
               {posts.map((post) => (
                 <Card
-                  key={post.id} // Usar el atributo id como key
+                  key={post.id}
                   id={post.id}
                   title={post.title}
                   image_url={post.image_url}

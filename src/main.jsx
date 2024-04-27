@@ -40,6 +40,24 @@ const router = createBrowserRouter([
       { path: "/Account", element: <UserInfo /> },
       { path: "/loged", element: <div>Welcome</div> },
       { path: "/profile", element: <h1>Loading Profile...</h1> },
+      {path: "/notifications",
+        element: (
+          <div>
+            <div className="alert alert-success" role="alert">
+              <h4 className="alert-heading">Well done!</h4>
+              <p>
+                Aww yeah, you successfully read this important alert message.
+                This example text is going to run a bit longer so that you can
+                see how spacing within an alert works with this kind of content.
+              </p>
+              <p className="mb-0">
+                Whenever you need to, be sure to use margin utilities to keep
+                things nice and tidy.
+              </p>
+            </div>{" "}
+          </div>
+        ),
+      },
 
       {
         path: "/groups",
